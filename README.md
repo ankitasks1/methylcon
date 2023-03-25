@@ -40,7 +40,7 @@ genome folder will be created by default
 
 ##############################################
 
-      # Snakemake Version
+      # <ins>Snakemake Version</ins>
 
 ##############################################
 
