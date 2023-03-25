@@ -9,7 +9,11 @@ The methylcon pipeline has been created using:
 
 For each version and language used a specific syntax and set of files required
 
+##############################################
+
 ### <u><b>Python Version</u></b>
+
+##############################################
 
 
 Run_syntax
@@ -34,9 +38,11 @@ bowtie2,/Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/softwares/bowti
 
 genome folder will be created by default
 
+##############################################
 
 ### <u><b>Snakemake Version</u></b>
 
+##############################################
 
 #Run syntax
 
