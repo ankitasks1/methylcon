@@ -16,7 +16,7 @@ For each version and language used a specific syntax and set of files required
 ##############################################
 
 
-<ins>Run_syntax</ins>
+<ins><b>Run_syntax</b></ins>
 
 <code>python methylcon.py --outdir out --softsheet /Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/softsheet.csv --samplesheet /Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/samplesheet.csv --genome /Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/genome/ --genome_prefix hg38 --Rscript /usr/local/bin/Rscript --plotscript script.R</code>
 
@@ -44,7 +44,7 @@ genome folder will be created by default
 
 ##############################################
 
-<ins>Run syntax</ins>
+<ins><b>Run syntax</b></ins>
 
 <code>snakemake --cores 1</code>
 
@@ -53,6 +53,7 @@ or
 <code>snakemake -cores 1 -s methylcon.smk</code>
 
 <ins><b>cat samplesheet.csv</b></ins>
+
 N15_S7_L001,N15_S7_L001_R1_001.fastq.gz,N15_S7_L001_R2_001.fastq.gz
 N18_S8_L001,N18_S8_L001_R1_001.fastq.gz,N18_S8_L001_R2_001.fastq.gz
 
@@ -61,6 +62,7 @@ Softwares can be given as full path or installed from conda/pip
 and full path given can be changed in user case.
 
 #Index must be generated before hand (ideally it should generate by default but there is a bug which need correctiion). No other bug is present and pipeline will run smoothly.
+
 <code>snakemake -cores 1 -s methylcon.smk prepare_index</code>
 
 #for Nextflow
