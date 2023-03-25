@@ -21,14 +21,14 @@ For each version and language used a specific syntax and set of files required
 <code>python methylcon.py --outdir out --softsheet /Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/softsheet.csv --samplesheet /Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/samplesheet.csv --genome /Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/genome/ --genome_prefix hg38 --Rscript /usr/local/bin/Rscript --plotscript script.R</code>
 
 
-cat samplesheet.csv 
+<ins><b>cat samplesheet.csv</b></ins>
 
 SRR11207817,SRR11207817_1.fastq.gz,SRR11207817_2.fastq.gz
 
 SRR11207820,SRR11207820_1.fastq.gz,SRR11207820_2.fastq.gz
 
 
-cat softsheet.csv 
+<ins><b>cat softsheet.csv</b></ins>
 
 fastqc,/Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/softwares/FastQC/
 trimgalore,/Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/softwares/TrimGalore-0.6.7/
@@ -44,7 +44,7 @@ genome folder will be created by default
 
 ##############################################
 
-#Run syntax
+<ins>Run syntax</ins>
 
 <code>snakemake --cores 1</code>
 
@@ -52,7 +52,7 @@ or
 
 <code>snakemake -cores 1 -s methylcon.smk</code>
 
-cat samplesheet.csv 
+<ins><b>cat samplesheet.csv</b></ins>
 N15_S7_L001,N15_S7_L001_R1_001.fastq.gz,N15_S7_L001_R2_001.fastq.gz
 N18_S8_L001,N18_S8_L001_R1_001.fastq.gz,N18_S8_L001_R2_001.fastq.gz
 
