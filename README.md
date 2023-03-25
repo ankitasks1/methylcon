@@ -11,7 +11,7 @@ For each version and language used a specific syntax and set of files required
 
 ##############################################
 
-### <u><b>Python Version</u></b>
+        <u><b>Python Version</u></b>
 
 ##############################################
 
@@ -40,7 +40,7 @@ genome folder will be created by default
 
 ##############################################
 
-### <u><b>Snakemake Version</u></b>
+      <u><b>Snakemake Version</u></b>
 
 ##############################################
 
