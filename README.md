@@ -16,7 +16,7 @@ For each version and language used a specific syntax and set of files required
 ##############################################
 
 
-Run_syntax
+<ins>Run_syntax</ins>
 
 <code>python methylcon.py --outdir out --softsheet /Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/softsheet.csv --samplesheet /Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/samplesheet.csv --genome /Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/genome/ --genome_prefix hg38 --Rscript /usr/local/bin/Rscript --plotscript script.R</code>
 
