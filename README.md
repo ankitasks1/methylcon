@@ -7,8 +7,10 @@ The methylcon pipeline has been created using:
 
 For each version and language used a specific syntax and set of files required
 #for python
+
+
 Run_syntax
-python methylcon.py --outdir out --softsheet /Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/softsheet.csv --samplesheet /Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/samplesheet.csv --genome /Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/genome/ --genome_prefix hg38 --Rscript /usr/local/bin/Rscript --plotscript script.R
+<code>python methylcon.py --outdir out --softsheet /Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/softsheet.csv --samplesheet /Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/samplesheet.csv --genome /Users/ankitverma/Documents/Archivio2/Amplicon/methylcon/genome/ --genome_prefix hg38 --Rscript /usr/local/bin/Rscript --plotscript script.R</code>
 
 
 cat samplesheet.csv 
@@ -27,12 +29,14 @@ genome folder will be created by default
 
 
 #for snakemake
+
+
 #Run syntax
-snakemake --cores 1
+<code>snakemake --cores 1</code>
 
 or 
 
-snakemake -cores 1 -s methylcon.smk
+<code>snakemake -cores 1 -s methylcon.smk</code>
 
 cat samplesheet.csv 
 N15_S7_L001,N15_S7_L001_R1_001.fastq.gz,N15_S7_L001_R2_001.fastq.gz
