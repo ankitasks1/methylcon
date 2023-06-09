@@ -71,6 +71,7 @@ and full path given can be changed in user case.
   # Nextflow Version
 
 ##############################################
+
 <ins><b>Run syntax</b></ins>
 
 <code>nextflow run methylcon.nf</code>
