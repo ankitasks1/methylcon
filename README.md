@@ -66,4 +66,11 @@ and full path given can be changed in user case.
 <code>snakemake -cores 1 -s methylcon.smk prepare_index</code>
 
 #for Nextflow
-pipeline generation in progress
+
+
+<code>nextflow run methylcon.nf</code>
+
+   
+-> It also needs samplesheet.csv
+
+
