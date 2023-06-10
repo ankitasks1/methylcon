@@ -214,24 +214,19 @@ workflow {
         .map { row -> tuple(row.sampleId, file(row.read1), file(row.read2)) }
         .set{ reads_ch }
 
-   Channel
-       .fromPath(params.fasta)
-       .set{ fasta_ch }
-
    // Check if the output directory already exists
    def indexExists = file(params.bismark_index).exists()
 
    // Run GENOME_INDEX process only if the index doesn't exist
    if (!indexExists) {
-       genome_index_ch = GENOME_INDEX(fasta_ch)
-       println "Index were not found. So generating index"
+       genome_index_ch = GENOME_INDEX(params.genomedir)
+       println "Index were not found. So generating them"
        println "Finished Genome Index generation"
    }
 
 
   fastqc_ch = FASTQC(reads_ch)
   trim_ch = TRIMGALORE(reads_ch)
-  //genome_index_ch = GENOME_INDEX(fasta_ch)
   bismark_align_ch = BISMARK_ALIGN(reads_ch, trim_ch)
   bam_sort_ch = BAM_SORT(reads_ch, bismark_align_ch)
   bam_sort_name_ch = BAM_SORT_READNAME(reads_ch, bam_sort_ch)
