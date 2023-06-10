@@ -86,7 +86,7 @@ SRR11207820,/Users/ankitverma/Documents/tutorial/nextflow/SRR11207820_1.fastq.gz
 SRR11207817,/Users/ankitverma/Documents/tutorial/nextflow/SRR11207817_1.fastq.gz,/Users/ankitverma/Documents/tutorial/nextflow/SRR11207817_2.fastq.gz
 
 
-# If you run nextflow on cluster/Linux env, one can install softwares via conda
+# If you run nextflow on cluster/Linux env, one can install softwares via conda and use methylcon_clusterversion.nf
 
 conda install -c bioconda cutadapt
 
