@@ -1,5 +1,19 @@
-params.index = "$projectDir/data/index.csv"
+params.input = "$projectDir/data/samplesheet.csv"
 params.outdir = "$projectDir/allouts"
+params.genomedir = "$projectDir/genome"
+params.fasta = "ref.fa"
+params.bismark_index = "$projectDir/genome/Bisulfite_Genome"
+
+
+log.info """\
+    M E T H Y L C O N - N F   P I P E L I N E
+    =========================================
+    Samplesheet Path        : ${params.input}
+    Genome Index Directory  : ${params.genomedir}    
+    Genome Fasta File       : ${params.fasta}
+    Output Files Directory  : ${params.outdir}
+    """
+    .stripIndent()
 
 process FASTQC {
     publishDir params.outdir, mode: 'copy'
@@ -38,6 +52,20 @@ process TRIMGALORE {
     """
 }
 
+process GENOME_INDEX {
+    input:
+    path "params.genomedir"
+
+    //output is not required
+
+    script:
+    """
+    echo "Generating Index: Reference Genome"
+    echo "${params.fasta}"
+    ~/Documents/tutorial/dollar_education/softwares/Bismark-0.22.3/bismark_genome_preparation --bowtie2 --verbose --path_to_aligner ~/Documents/tutorial/dollar_education/softwares/bowtie2-2.5.0-macos-arm64/ ${params.genomedir}
+    echo "Bismark Index generated"
+    """
+}
 
 process BISMARK_ALIGN {
     debug true
@@ -162,20 +190,53 @@ process BISMARK_METHYLCALL {
     """
 }
 
+
+process MULTIQC {
+    publishDir params.outdir, mode:'copy'
+
+    input:
+    path params.outdir
+
+    output:
+    path 'multiqc_report.html'
+
+    script:
+    """
+    echo "Performing multiqc check"
+    multiqc ${params.outdir} --verbose  --interactive --force
+    """
+}
+
 workflow {
   Channel
-        .fromPath(params.index, checkIfExists: true)
+        .fromPath(params.input, checkIfExists: true)
         .splitCsv(header: true)
         .map { row -> tuple(row.sampleId, file(row.read1), file(row.read2)) }
         .set{ reads_ch }
 
+   Channel
+       .fromPath(params.fasta)
+       .set{ fasta_ch }
+
+   // Check if the output directory already exists
+   def indexExists = file(params.bismark_index).exists()
+
+   // Run GENOME_INDEX process only if the index doesn't exist
+   if (!indexExists) {
+       genome_index_ch = GENOME_INDEX(fasta_ch)
+       println "Index were not found. So generating index"
+       println "Finished Genome Index generation"
+   }
+
+
   fastqc_ch = FASTQC(reads_ch)
   trim_ch = TRIMGALORE(reads_ch)
+  //genome_index_ch = GENOME_INDEX(fasta_ch)
   bismark_align_ch = BISMARK_ALIGN(reads_ch, trim_ch)
   bam_sort_ch = BAM_SORT(reads_ch, bismark_align_ch)
   bam_sort_name_ch = BAM_SORT_READNAME(reads_ch, bam_sort_ch)
   bam_index_ch = BAM_INDEX(reads_ch, bam_sort_ch)
-  //bam_index_name_ch = BAM_READNAME_INDEX(reads_ch, bam_sort_name_ch)
   bismark_methylcall_ch = BISMARK_METHYLCALL(reads_ch, bam_sort_name_ch)
+  multiqc_ch = MULTIQC(bismark_methylcall_ch)
 }
 
