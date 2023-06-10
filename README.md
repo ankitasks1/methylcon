@@ -83,8 +83,25 @@ and full path given can be changed in user case.
 sampleId,read1,read2
 
 SRR11207820,/Users/ankitverma/Documents/tutorial/nextflow/SRR11207820_1.fastq.gz,/Users/ankitverma/Documents/tutorial/nextflow/SRR11207820_2.fastq.gz
-
 SRR11207817,/Users/ankitverma/Documents/tutorial/nextflow/SRR11207817_1.fastq.gz,/Users/ankitverma/Documents/tutorial/nextflow/SRR11207817_2.fastq.gz
+
+
+# If you run on cluster/Linux env, one can install softwares via conda
+
+conda install -c bioconda cutadapt
+
+conda install -c bioconda bowtie2
+
+conda install -c bioconda bismark
+
+conda install -c bioconda trim-galore
+
+conda install -c bioconda fastqc
+
+conda install -c bioconda nextflow
+
+conda install -c bioconda multiqc
+
 
 
 
