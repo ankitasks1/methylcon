@@ -78,4 +78,13 @@ and full path given can be changed in user case.
 
 #-> It also needs samplesheet.csv
 
+<ins><b>cat samplesheet.csv</b></ins>
+
+sampleId,read1,read2
+
+SRR11207820,/Users/ankitverma/Documents/tutorial/nextflow/SRR11207820_1.fastq.gz,/Users/ankitverma/Documents/tutorial/nextflow/SRR11207820_2.fastq.gz
+
+SRR11207817,/Users/ankitverma/Documents/tutorial/nextflow/SRR11207817_1.fastq.gz,/Users/ankitverma/Documents/tutorial/nextflow/SRR11207817_2.fastq.gz
+
+
 
