@@ -1,10 +1,27 @@
+#!/usr/bin/env nextflow
+
 params.input = "$projectDir/data/samplesheet.csv"
 params.outdir = "$projectDir/allouts"
 params.genomedir = "$projectDir/genome"
 params.fasta = "ref.fa"
 params.bismark_index = "$projectDir/genome/Bisulfite_Genome"
+params.parameters = ""
+params.help = ""
+
+// Show parameters message and exit
+if (params.parameters){
+    parameters()
+    exit 0
+}
 
 
+if (params.help){
+    helpmessage()
+    exit 0
+}
+
+
+def parameters() {
 log.info """\
     M E T H Y L C O N - N F   P I P E L I N E
     =========================================
@@ -14,6 +31,15 @@ log.info """\
     Output Files Directory  : ${params.outdir}
     """
     .stripIndent()
+}
+
+def helpmessage() {
+log.info """\
+
+usage: nextflow run methylcon_clusterversion.nf --input path_to_samplesheet.csv --outdir name_of_output_directory --genome name_of_directory_with_genome_fasta
+
+""".stripIndent()
+}
 
 process FASTQC {
     publishDir params.outdir, mode: 'copy'
@@ -195,7 +221,7 @@ process MULTIQC {
     publishDir params.outdir, mode:'copy'
 
     input:
-    path params.outdir
+    path '*'
 
     output:
     path 'multiqc_report.html'
@@ -203,7 +229,8 @@ process MULTIQC {
     script:
     """
     echo "Performing multiqc check"
-    multiqc ${params.outdir} --verbose  --interactive --force
+    multiqc . --verbose  --interactive
+    echo "MultiQC done"
     """
 }
 
@@ -232,6 +259,9 @@ workflow {
   bam_sort_name_ch = BAM_SORT_READNAME(reads_ch, bam_sort_ch)
   bam_index_ch = BAM_INDEX(reads_ch, bam_sort_ch)
   bismark_methylcall_ch = BISMARK_METHYLCALL(reads_ch, bam_sort_name_ch)
-  multiqc_ch = MULTIQC(bismark_methylcall_ch)
+  multiqc_ch = MULTIQC(bismark_methylcall_ch.mix(trim_ch, fastqc_ch).collect())
 }
 
+workflow.onComplete {
+    log.info ( workflow.success ? "\nDone! Open the following report in your browser --> $params.outdir/multiqc_report.html\n" : "Oops .. something went wrong" )
+}
