@@ -199,7 +199,7 @@ process MULTIQC {
     publishDir params.outdir, mode:'copy'
 
     input:
-    path params.outdir
+    path '*'
 
     output:
     path 'multiqc_report.html'
@@ -207,7 +207,7 @@ process MULTIQC {
     script:
     """
     echo "Performing multiqc check"
-    multiqc ${params.outdir} --verbose  --interactive --force
+    multiqc . --verbose  --interactive --force
     """
 }
 
@@ -236,6 +236,6 @@ workflow {
   bam_sort_name_ch = BAM_SORT_READNAME(reads_ch, bam_sort_ch)
   bam_index_ch = BAM_INDEX(reads_ch, bam_sort_ch)
   bismark_methylcall_ch = BISMARK_METHYLCALL(reads_ch, bam_sort_name_ch, params.genomedir)
-  multiqc_ch = MULTIQC(bismark_methylcall_ch)
+  multiqc_ch = MULTIQC(bismark_methylcall_ch.mix(trim_ch, fastqc_ch).collect())
 }
 
