@@ -1,3 +1,5 @@
+#!/usr/bin/env nextflow
+
 params.input = "$projectDir/data/samplesheet.csv"
 params.outdir = "$projectDir/allouts"
 params.genomedir = "$projectDir/genome"
