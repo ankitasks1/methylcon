@@ -1,2 +1,3 @@
-N15_S7_L001,N15_S7_L001_R1_001.fastq.gz,N15_S7_L001_R2_001.fastq.gz
-N18_S8_L001,N18_S8_L001_R1_001.fastq.gz,N18_S8_L001_R2_001.fastq.gz
+sampleId,read1,read2
+SRR11207820,/Users/ankitverma/Documents/tutorial/nextflow/SRR11207820_1.fastq.gz,/Users/ankitverma/Documents/tutorial/nextflow/SRR11207820_2.fastq.gz
+SRR11207817,/Users/ankitverma/Documents/tutorial/nextflow/SRR11207817_1.fastq.gz,/Users/ankitverma/Documents/tutorial/nextflow/SRR11207817_2.fastq.gz
